@@ -1,7 +1,7 @@
 <template lang='pug'>
 .home
   // img(alt="Vue logo" src="../assets/logo.png")
-  span home {{characterList}}
+  span Message page {{characterList}}
   button(@click='fetch')
     span fetch
   
@@ -21,7 +21,7 @@ export default defineComponent({
   
     
     const characterList = computed(
-      () => store.getters['getCharacter']
+      () => store.getters['history/getCharacter']
     ) 
   
     
@@ -30,7 +30,7 @@ export default defineComponent({
       characterList,
       store,
       fetch: () => {
-        store.dispatch('fetchCharacter')
+        store.dispatch('history/fetchCharacter')
       },
     };
   },
