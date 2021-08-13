@@ -1,10 +1,11 @@
+// as it's a test project, I decided to show how it possible to use Base layout to keep app.vue file simpler 
+// purpose id DRY (don't repeat  yourself)
+
 <template lang='pug'>
 router-view
 </template>
 
 <script>
-
-
 export default {
   name: 'App',
 }
@@ -35,6 +36,16 @@ body {
   color: var(--app-ui-black-10);
 
   overflow: auto;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
 }
 
 </style>

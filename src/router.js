@@ -6,6 +6,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
+    redirect: { name: 'Message'},
     component: BaseLayout,
     children: [
       {
@@ -22,17 +23,11 @@ const routes = [
       }
     ]
   },
-  {
-    path: '/about',
-    name: 'About',
-   
-    component: () => import('./views/About.vue')
-  }
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
 })
 
 export default router
