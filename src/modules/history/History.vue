@@ -1,11 +1,24 @@
 <template lang='pug'>
 .column
   h1 This is an History page
-  .row(v-for="obj in retrievedObject")
-    span id: {{obj.id}} title: {{obj.title}}
+  .row(v-if='retrievedObject')
+    
+  div(
+      v-for="obj in retrievedObject"
+      )
+      
+      selected-character(
+        :obj='obj',
+        :key='obj.id'
+  
+      )
+   
+  
+ 
+
  
  
-  span {{characterList}}
+ 
   
 </template>
 
@@ -13,10 +26,16 @@
 import { defineComponent, computed } from "vue";
 import { useStore } from "vuex";
 
+import SelectedCharacter from '../history/SelectedCharacter.vue'
+
 export default defineComponent({
-  name: "History",
+  name: "Hiatory",
+  components: {
+    "selected-character": SelectedCharacter,
+  },
   setup: () => {
     const store = useStore();
+  
 
     // Sure it 's possible to use imperative method and set localStorage 'by hand', 
     // but why, if I can use plugin and project conditions will be complit too
@@ -35,11 +54,24 @@ export default defineComponent({
 
     const characterList = computed(
       () => store.getters['history/getCharacter']
-    )   
+    )
+
+    const getHistory = (id) => {
+      store.dispatch('history/selectedCharacter', id)
+    }
+
+    const SelectedCharacter = computed(
+      () => store.getters['history/getSelectedCharacter']
+    )
+
+  
 
     return {
       retrievedObject,
       characterList,
+      getHistory,
+      SelectedCharacter,
+    
     }
 
   }

@@ -7,8 +7,8 @@
       form.form(@submit.prevent="onSubmit")
         .form-row
           div
-            label(for='title') Title {{title}}
-            input(
+            label(for='title') Title
+          input(
               id='title'
               type='text'
               v-model='title'
@@ -17,37 +17,46 @@
           
         .form-row
           div
-            label(for='message') message {{message}}
+            label(for='message') message
           input(
             id='message'
             type='text'
             v-model='message'
             maxlength="256"
           )
+        //- .form-row
+        //-   div
+        //-     label(for='select') select
+        //-   input(
+        //-     id='select'
+        //-     placeholder='select a character'
+        //-     v-model='select'
+        //-     @focus="expandCharacterList"
+        //-     autocomplete="off"
+        //-   )
+        //-   .dropdown-content(v-show="showCharacterList")
+        //-     .dropdown-item(
+        //-       @click="selectCharacter(character)"
+        //-       v-for="(character, index) in characterList"
+        //-       :key="index"
+        //-     )
+        //-       .row.j-between
+        //-         span  {{ character.label }}
+              
+       
         .form-row
-          div
-            label(for='select') select
-          input(
-            id='select'
-            placeholder='select a character'
-            v-model='select'
-            @focus="expandCharacterList"
+          Select(
+            label='Character'
+            placeholder='Pick a character'
+            :options="characterList"
             autocomplete="off"
           )
-          .dropdown-content(v-show="showCharacterList")
-            .dropdown-item(
-              @click="selectCharacter(character)"
-              v-for="(character, index) in characterList"
-              :key="index"
-            )
-              .row.j-between
-                span  {{ character.label }}
-              
+        
         .form-row
           button(
             type="submit"
             
-          ) Send
+          ) Send  
 
 </template>
 
@@ -58,13 +67,13 @@ import { useStore } from "vuex";
 import router from "../../router.js";
 import { DateTime } from "luxon";
 
-// import InputText from '../../components/InputText.vue'
+import Select from "../../components/Select.vue"
 
 export default defineComponent({
   name: "Message",
-  // components: {
-  //   InputText
-  // },
+  components: {
+    Select
+  },
   setup: () => {
     
     onMounted(()=> {
@@ -75,9 +84,8 @@ export default defineComponent({
 
     const title = ref('')
     const message = ref('')
-    const select = ref('')
-    const showCharacterList = ref(false)
-    const selectId =ref(null)
+  
+  
  
     
     const characterList = computed(
@@ -88,19 +96,6 @@ export default defineComponent({
       () => store.getters['history/getCharacterObj']
     )
 
-    const expandCharacterList = () => {
-        showCharacterList.value = true
-    }
-
-    const selectCharacter = (character) =>  {
-        //debugger
-        selectId.value = character.id
-        select.value = character.label
-        
-      
-        //this.vehicleSelectionError = false
-        showCharacterList.value = false
-    }
 
     const onSubmit = () => {
       const datestamp = DateTime.now().toISO()
@@ -112,7 +107,7 @@ export default defineComponent({
         message: `${message.value}`,
         date: `${date}`,
         time: `${time}`,
-        id: `${selectId.value}`,
+        img: `${store.getters['history/getSelectedCharacterId']}`,
       }
       // here I use store, and not set manually localStorage, because of the plugin in root_store
       store.commit('history/setCharacterObj', testObject)
@@ -124,13 +119,11 @@ export default defineComponent({
       store,
       title,
       message,
-      select,
-      showCharacterList,
-      expandCharacterList,
-      selectCharacter,
+  
+   
       onSubmit,
       tempOBJ,
-      selectId,
+     
   
     };
   },
@@ -157,11 +150,7 @@ export default defineComponent({
 
       transition: top 0.1s linear;
     }
-.input {
-  width: 100%;
-  height: 20px;
-  border: solid 1px darkblue;
-}
+
 .form-section {
     position: relative;
 
