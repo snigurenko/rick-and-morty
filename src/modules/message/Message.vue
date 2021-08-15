@@ -1,62 +1,45 @@
 <template lang='pug'>
-.row
-  .column
-    // img(alt="Vue logo" src="../assets/logo.png")
-
-    section.form-section
-      form.form(@submit.prevent="onSubmit")
-        .form-row
-          div
-            label(for='title') Title
-          input(
-              id='title'
-              type='text'
-              v-model='title'
-              maxlength="32"
-            )
+.message-wrapper
+  
+  // img(alt="Vue logo" src="../assets/logo.png")
+  .title
+    span  Send a new message
+    
+  form.form(@submit.prevent="onSubmit")
+    .form-row
+      div
+        label(for='title') Title
+      input(
+          id='title'
+          type='text'
+          v-model='title'
+          maxlength="32"
+        )
+      
+    .form-row
+      div
+        label(for='message') message
+      input(
+        id='message'
+        type='text'
+        v-model='message'
+        maxlength="256"
+      )
           
-        .form-row
-          div
-            label(for='message') message
-          input(
-            id='message'
-            type='text'
-            v-model='message'
-            maxlength="256"
-          )
-        //- .form-row
-        //-   div
-        //-     label(for='select') select
-        //-   input(
-        //-     id='select'
-        //-     placeholder='select a character'
-        //-     v-model='select'
-        //-     @focus="expandCharacterList"
-        //-     autocomplete="off"
-        //-   )
-        //-   .dropdown-content(v-show="showCharacterList")
-        //-     .dropdown-item(
-        //-       @click="selectCharacter(character)"
-        //-       v-for="(character, index) in characterList"
-        //-       :key="index"
-        //-     )
-        //-       .row.j-between
-        //-         span  {{ character.label }}
-              
-       
-        .form-row
-          Select(
-            label='Character'
-            placeholder='Pick a character'
-            :options="characterList"
-            autocomplete="off"
-          )
+    
+    .form-row
+      Select(
+        label='Character'
+        placeholder='Pick a character'
+        :options="characterList"
+        autocomplete="off"
+      ).select
+    
+    .form-row
+      button(
+        type="submit"
         
-        .form-row
-          button(
-            type="submit"
-            
-          ) Send  
+      ) Send  
 
 </template>
 
@@ -72,10 +55,12 @@ import Select from "../../components/Select.vue"
 export default defineComponent({
   name: "Message",
   components: {
-    Select
+    Select,
   },
   setup: () => {
     
+    // do it now to avoid possible delays in the response from the server side 
+    // when opening the select list
     onMounted(()=> {
       store.dispatch('history/fetchCharacter')
     })
@@ -84,18 +69,12 @@ export default defineComponent({
 
     const title = ref('')
     const message = ref('')
-  
-  
- 
     
+    // here will be just 'name' and 'id'
+    // and I throw it to the select component as a props
     const characterList = computed(
-      () => store.getters['history/getCharacter']
+      () => store.getters['history/getCharacterList']
     ) 
-
-    const tempOBJ = computed(
-      () => store.getters['history/getCharacterObj']
-    )
-
 
     const onSubmit = () => {
       const datestamp = DateTime.now().toISO()
@@ -107,7 +86,7 @@ export default defineComponent({
         message: `${message.value}`,
         date: `${date}`,
         time: `${time}`,
-        img: `${store.getters['history/getSelectedCharacterId']}`,
+        id: `${store.getters['history/getSelectedCharacterId']}`,
       }
       // here I use store, and not set manually localStorage, because of the plugin in root_store
       store.commit('history/setCharacterObj', testObject)
@@ -119,12 +98,7 @@ export default defineComponent({
       store,
       title,
       message,
-  
-   
       onSubmit,
-      tempOBJ,
-     
-  
     };
   },
 });
@@ -132,48 +106,48 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.label {
-      position: absolute;
+.message-wrapper {
+  display: flex;
+  flex-flow: column;
 
-      display: inline-flex;
+  width: 100%;
+  height: auto;
 
-      top: 17px;
-      left: 13px;
+  .title {
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 40px;
+    text-align: center;
+  }
 
-      margin: 0;
-      padding-left: 4px;
-      padding-right: 4px;
-
-      line-height: 14px;
-
-      background-color: var(--app-ui-bg-white);
-
-      transition: top 0.1s linear;
-    }
-
-.form-section {
-    position: relative;
-
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
 
     width: 100%;
-    height: auto;
+    height: 100%;
 
-    .form {
+    .form-row {
       display: flex;
-      flex-flow: column;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
 
       width: 100%;
-      height: 100%;
 
-      .form-row {
+      &:not(:last-child) {
+        margin-bottom: 24px;
+      }
+
+      .select {
+        display: block;
         width: 100%;
-
-        &:not(:last-child) {
-          margin-bottom: 24px;
-        }
       }
     }
   }
+}
+
 </style>

@@ -9,8 +9,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-// import { useStore } from "vuex";
-
 import Header from "../components/Header.vue";
 
 
@@ -30,8 +28,8 @@ export default defineComponent({
   position: relative;
 
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
   flex-flow: column;
 
   width: 100%;
@@ -40,22 +38,20 @@ export default defineComponent({
   padding: 0;
   margin: 0;
 
-  background-color: var(--app-ui-bg-light);
+  background-color: var(--app-ui-bg-white);
 
   .main {
     position: relative;
 
     display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    flex-flow: column;
+    flex-direction: row;
+    justify-content: center;
 
     padding-left: var(--app-aside-width);
 
     width: 100%;
     height: 100%;
 
-    overflow: hidden;
   }
 }
 </style>

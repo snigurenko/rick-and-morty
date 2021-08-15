@@ -4,15 +4,14 @@
   const history = {
     namespaced: true,
     state: {
-      character: [],
+      characterList: [],
       characterObj: [],
       selectedCharacterId: null,
-      electedCharacter: [],
-
+      currentCharacter: null,
     },
     getters: {
-      getCharacter (state) {
-        return state.character
+      getCharacterList (state) {
+        return state.characterList
       },
 
       getCharacterObj (state) {
@@ -23,14 +22,11 @@
         return state.selectedCharacterId
       },
 
-      getSelectedCharacter (state) {
-        return state.selectedCharacter
-      }
     },
   
     mutations: {
-      setCharacter (state, payload) {
-        state.character = payload
+      setCharacterList (state, payload) {
+        state.characterList = payload
       },
 
       setCharacterObj (state, obj) {
@@ -41,9 +37,6 @@
         state.selectedCharacterId = payload
       },
 
-      setSelectedCharacter (state, payload) {
-        state.selectedCharacter = payload
-      }
     },
     actions: {
       fetchCharacter: async ({ commit }) => {
@@ -52,25 +45,21 @@
           const response = await axios.get("https://rickandmortyapi.com/api/character");
   
           if (response.status === 200) {
-              console.log(11111, response)
-             
-              const temp = response.data.results.map(
+            
+            // make new array with limited data, potentially if received response will 
+            // contain a lot of data, there is no need to pull it through components
+            const limitedDataCharacter = response.data.results.map(
                 (character) => ({
                     label: character.name,
                     id: character.id,
-                    img: character.image,
                 })
               )
-              console.log(temp)
-            commit("setCharacter", temp);
+            commit("setCharacterList", limitedDataCharacter);
           }
         } catch (e) {
           console.log(e.response);
         }
       },
-
-  
-    
     },
   };
 

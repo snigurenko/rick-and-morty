@@ -3,23 +3,12 @@
   h1 This is an History page
   .row(v-if='retrievedObject')
     
-  div(
-      v-for="obj in retrievedObject"
+  selected-character(
+      v-for="obj in retrievedObject",
+      :obj='obj',
+      :key='obj.id'
       )
-      
-      selected-character(
-        :obj='obj',
-        :key='obj.id'
-  
-      )
-   
-  
- 
 
- 
- 
- 
-  
 </template>
 
 <script>
