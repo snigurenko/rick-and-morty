@@ -1,0 +1,31 @@
+@mixin input {
+    display: flex;
+  
+    width: 100%;
+    height: 34px;
+  
+    margin: 0; 
+    padding: 0 16px;
+  
+    font-size: 14px;
+    line-height: 18px;
+  
+    border: 1px solid var(--app-ui-lightgrey);
+  
+    outline: none;
+    
+    border-radius: 8px;
+  
+    background-color: var(--app-ui-bg-white);
+  
+    color: var(--app-ui-darkblue);
+  
+    &::placeholder {
+      
+      font-family: Source Sans Pro;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 18px;
+    }
+  }

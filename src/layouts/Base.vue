@@ -47,11 +47,18 @@ export default defineComponent({
     flex-direction: row;
     justify-content: center;
 
-    padding-left: var(--app-aside-width);
+    padding: 20px;
 
     width: 100%;
+    max-width: 500px;
     height: 100%;
 
+  }
+
+  @media (max-width: 480px) {
+    .main {
+      max-width: 390px;
+    }
   }
 }
 </style>

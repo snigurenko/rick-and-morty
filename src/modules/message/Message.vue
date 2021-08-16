@@ -1,20 +1,13 @@
 <template lang='pug'>
 .message-wrapper
-  
-  // img(alt="Vue logo" src="../assets/logo.png")
   .title
     span  Send a new message
     
   form.form(@submit.prevent="onSubmit")
     .form-row
-      div
-        label(for='title') Title
-      input(
-          id='title'
-          type='text'
-          v-model='title'
-          maxlength="32"
-        )
+      rm-input-title.input-title(
+        placeholder='Enter the title'
+      )
       
     .form-row
       div
@@ -28,7 +21,7 @@
           
     
     .form-row
-      Select(
+      rm-select(
         label='Character'
         placeholder='Pick a character'
         :options="characterList"
@@ -36,10 +29,10 @@
       ).select
     
     .form-row
-      button(
-        type="submit"
-        
-      ) Send  
+      rm-button(
+        label="Send"
+        :disabled="disabled"
+      )
 
 </template>
 
@@ -51,11 +44,15 @@ import router from "../../router.js";
 import { DateTime } from "luxon";
 
 import Select from "../../components/Select.vue"
+import Button from "../../components/Button.vue"
+import InputTitle from "../../components/InputTitle.vue"
 
 export default defineComponent({
   name: "Message",
   components: {
-    Select,
+    "rm-select": Select,
+    "rm-button": Button,
+    "rm-input-title": InputTitle,
   },
   setup: () => {
     
@@ -66,15 +63,17 @@ export default defineComponent({
     })
 
     const store = useStore();
-
-    const title = ref('')
+   
     const message = ref('')
+    const disabled = ref(false)
     
     // here will be just 'name' and 'id'
     // and I throw it to the select component as a props
     const characterList = computed(
       () => store.getters['history/getCharacterList']
-    ) 
+    )
+
+    const getTitle = computed(()=> store.getters['history/getMessageTitle'])
 
     const onSubmit = () => {
       const datestamp = DateTime.now().toISO()
@@ -82,7 +81,7 @@ export default defineComponent({
       const date = DateTime.now().toLocaleString()
       
       const testObject = {
-        title: `${title.value}`,
+        title: `${getTitle.value}`,
         message: `${message.value}`,
         date: `${date}`,
         time: `${time}`,
@@ -96,30 +95,29 @@ export default defineComponent({
     return {
       characterList,
       store,
-      title,
       message,
       onSubmit,
+      disabled,
     };
   },
 });
 
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .message-wrapper {
   display: flex;
   flex-flow: column;
+  align-items: center;
 
   width: 100%;
   height: auto;
 
   .title {
-    font-family: Source Sans Pro;
     font-style: normal;
     font-weight: 300;
     font-size: 32px;
     line-height: 40px;
-    text-align: center;
   }
 
   .form {
@@ -127,9 +125,11 @@ export default defineComponent({
     flex-direction: column;
     align-items: center;
     
+    border: solid 1px red;
 
     width: 100%;
     height: 100%;
+    
 
     .form-row {
       display: flex;
@@ -140,6 +140,11 @@ export default defineComponent({
 
       &:not(:last-child) {
         margin-bottom: 24px;
+      }
+
+      .input-title {
+        display: block;
+        width: 100%;
       }
 
       .select {

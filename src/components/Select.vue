@@ -14,7 +14,6 @@
       src="../assets/icons/Chevron.svg"
       :class="{ rotate: showCharacterList, chevron: !showCharacterList }"
     )
-       
 
     input.input(
       type="text"
@@ -36,18 +35,18 @@
             .row
             span  {{ option.label }}
 
-      
-     
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import { useStore } from "vuex";
 
+
+
 // import IconChevron from '../assets/icons/Chevron.vue'
 
 export default defineComponent({
-  name: "SelectSearch",
+  name: "select-character",
 //   components: {
 //     "icon-chevron": IconChevron,
 //   },
@@ -73,7 +72,6 @@ export default defineComponent({
 
   setup: () => {
     const store = useStore();
-    
     const showCharacterList = ref(false)
     const selectedLabel = ref('')
 
@@ -98,11 +96,12 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+@import '../styles/mixin.scss';
+
 .select-wrapper {
   position: relative;
 
   width: 100%;
-  max-width: 460px;
   height: auto;
 
   font-style: normal;
@@ -110,39 +109,17 @@ export default defineComponent({
 
   .label {
     font-size: 16px;
-    line-height: 20.11px;
+    line-height: 20px;
+    margin-bottom: 12px;
   }
   
   .input {
-    display: inline-flex;
-
-    width: 100%;
-    height: 34px;
-
-    margin-top: 13px; 
-    padding: 0 16px;
-
-    font-size: 14px;
-    line-height: 18px;
-
-    border: 1px solid var(--app-ui-lightgrey);
+    @include input;
 
     cursor: not-allowed;
-    outline: none;
-    
-    border-radius: 8px;
-
-    background-color: var(--app-ui-bg-white);
-
-    color: var(--app-ui-darkblue);
 
     &::placeholder {
       color: var(--app-ui-darkblue);
-      font-family: Source Sans Pro;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 16px;
-      line-height: 18px;
     }
   }
 
@@ -151,9 +128,6 @@ export default defineComponent({
     max-height: 138px;
 
     overflow-y: auto;
-    direction: ltr;
-    scrollbar-color: #d4aa70 #e4e4e4;
-    scrollbar-width: thin;
 
     border-radius: 0 0 8px 8px;
 
@@ -182,8 +156,8 @@ export default defineComponent({
 
     display: block;
 
-    top: 46px;
-    right: 17px;
+    top: 43px;
+    right: 20px;
 
     pointer-events: none;
 

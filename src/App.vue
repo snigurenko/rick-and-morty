@@ -16,12 +16,20 @@ export default {
 
 :root {
   --app-ui-bg-white: #ffffff;
+  --app-ui-bg-white-1: #FAFFFD;
 
   --app-ui-darkblue: #324B72;
+
+  --app-ui-blue-1: #4EADC5;
+  --app-ui-blue-: #0099cc;
   
   --app-ui-lightgrey: #E0E0E0;
   --app-ui-grey-1: #F4F4F4;
 
+
+
+
+  --app-mobile-width: 480px;
 
 
 }
@@ -34,6 +42,8 @@ html,
 body {
   width: 100%;
   height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 #app {

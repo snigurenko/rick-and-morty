@@ -8,6 +8,8 @@
       characterObj: [],
       selectedCharacterId: null,
       currentCharacter: null,
+      messageTitle: '',
+      message: '',
     },
     getters: {
       getCharacterList (state) {
@@ -20,6 +22,14 @@
 
       getSelectedCharacterId (state) {
         return state.selectedCharacterId
+      },
+
+      getMessageTitle (state) {
+        return state.messageTitle
+      },
+
+      getMessage (state) {
+        return state.message
       },
 
     },
@@ -35,6 +45,14 @@
 
       setSelectedCharacterId (state, payload) {
         state.selectedCharacterId = payload
+      },
+      
+      setMessageTitle (state, payload) {
+        state.messageTitle = payload
+      },
+
+      setMessage (state, payload) {
+        state.message = payload
       },
 
     },
