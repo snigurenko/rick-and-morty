@@ -156,8 +156,8 @@ export default defineComponent({
 
     display: block;
 
-    top: 43px;
-    right: 20px;
+    top: 44px;
+    right: 19px;
 
     pointer-events: none;
 

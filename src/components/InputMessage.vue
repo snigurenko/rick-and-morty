@@ -2,26 +2,29 @@
 .input-title-wrapper
 	.column(:class="{error: false}")
 		label.label(for='message' ) {{label}}
-		input.input(
+		textarea.input(
 			id='message'
 			type='text'
 			:placeholder="placeholder"
 			v-model='message'
 			maxlength="256"
+			@blur="onBlur"
 		)
 		
 </template>
 
 <script>
-import { defineComponent, ref, watchEffect, onUnmounted } from "vue";
+import { defineComponent, ref, onUnmounted } from "vue";
 import { useStore } from "vuex";
+
+
 
 export default defineComponent ({
   name: 'input-message',
 	props: {
 		label: {
 			type: String,
-			default: 'Title',
+			default: 'Message',
 		},
 		placeholder: {
       type: String,
@@ -34,18 +37,18 @@ export default defineComponent ({
 
 		const store = useStore();
 
-		watchEffect(() => {
-			
-			store.commit('history/setMessageTitle', message.value)
-			return
-		})
-
 		onUnmounted(() => { 
 			store.commit('history/setMessageTitle', '')
 		});
 
+		const onBlur = () => {
+			console.log('blur')
+			store.commit('history/setMessage', message.value)
+		}
+
 		return {
 			message,
+			onBlur,
 		}
 	}	
 
@@ -72,8 +75,36 @@ export default defineComponent ({
 	.input {
     @include input;
 
+	
+    overflow: auto;
+		padding-top: 9px;
+
+		font-family: Source Sans Pro;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 14px;
+		line-height: 18px;
+   
+
+    
+
+    resize: none; /*remove the resize handle on the bottom right*/
+
+		height: 140px;
+
+		align-items: start;
+
+	
+
 		&::placeholder {
       color: var(--app-ui-lightgrey);
+
+			display: flex;
+			flex-flow: row;
+			justify-content: start;
+
+			position: absolute;
+      top: 8px;
     }
   }
 

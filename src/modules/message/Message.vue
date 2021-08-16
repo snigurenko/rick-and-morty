@@ -10,13 +10,8 @@
       )
       
     .form-row
-      div
-        label(for='message') message
-      input(
-        id='message'
-        type='text'
-        v-model='message'
-        maxlength="256"
+      rm-input-message.input-message(
+        placeholder='Enter the message here...'
       )
           
     
@@ -46,6 +41,7 @@ import { DateTime } from "luxon";
 import Select from "../../components/Select.vue"
 import Button from "../../components/Button.vue"
 import InputTitle from "../../components/InputTitle.vue"
+import InputMessage from '../../components/InputMessage.vue'
 
 export default defineComponent({
   name: "Message",
@@ -53,6 +49,7 @@ export default defineComponent({
     "rm-select": Select,
     "rm-button": Button,
     "rm-input-title": InputTitle,
+    "rm-input-message": InputMessage,
   },
   setup: () => {
     
@@ -74,6 +71,7 @@ export default defineComponent({
     )
 
     const getTitle = computed(()=> store.getters['history/getMessageTitle'])
+    const getMessage = computed(()=> store.getters['history/getMessage'])
 
     const onSubmit = () => {
       const datestamp = DateTime.now().toISO()
@@ -82,7 +80,7 @@ export default defineComponent({
       
       const testObject = {
         title: `${getTitle.value}`,
-        message: `${message.value}`,
+        message: `${getMessage.value}`,
         date: `${date}`,
         time: `${time}`,
         id: `${store.getters['history/getSelectedCharacterId']}`,
@@ -142,12 +140,7 @@ export default defineComponent({
         margin-bottom: 24px;
       }
 
-      .input-title {
-        display: block;
-        width: 100%;
-      }
-
-      .select {
+      .input-title, .input-message, .select {
         display: block;
         width: 100%;
       }

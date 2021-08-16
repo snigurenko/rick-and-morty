@@ -35,6 +35,11 @@ export default defineComponent ({
 	},
 
 	setup: () => {
+
+		// as an example use useDebounced function imported from root src
+		// in ImputMessage do it without, just using input blur
+		// just want to show bouth methods
+		
 		const title = useDebounced('', 400)
 
 		const store = useStore();
