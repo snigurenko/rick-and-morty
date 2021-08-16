@@ -80,38 +80,32 @@ export default defineComponent ({
 	.input {
     @include input;
 
-	
-    overflow: auto;
-		padding-top: 9px;
+		align-items: start;
+
+		height: 140px;
 
 		font-family: Source Sans Pro;
 		font-style: normal;
 		font-weight: normal;
 		font-size: 14px;
 		line-height: 18px;
-   
-
-    
-
-    resize: none; /*remove the resize handle on the bottom right*/
-
-		height: 140px;
-
-		align-items: start;
-
 	
+    overflow-y: auto;
+		padding-top: 9px;
+
+		resize: none;
 
 		&::placeholder {
-      color: var(--app-ui-lightgrey);
+			position: absolute;
+			top: 8px;
 
 			display: flex;
 			flex-flow: row;
 			justify-content: start;
 
-			position: absolute;
-      top: 8px;
-    }
-  }
+			color: var(--app-ui-lightgrey);
+		}
+	}
 
 	.error {
 		.input {

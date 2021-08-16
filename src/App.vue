@@ -21,7 +21,7 @@ export default {
   --app-ui-darkblue: #324B72;
 
   --app-ui-blue-1: #4EADC5;
-  --app-ui-blue-2: #0099cc;
+  --app-ui-blue-: #0099cc;
 
   --app-ui-red-1: #DE212B;
   
@@ -39,12 +39,15 @@ html,
 body {
   width: 100%;
   height: 100%;
+
   margin: 0;
   padding: 0;
 }
 
 #app {
   position: relative;
+  
+  display: inline;
 
   width: 100%;
   height: 100%;
@@ -53,7 +56,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--app-ui-darkblue);
-
 }
 
 .row {

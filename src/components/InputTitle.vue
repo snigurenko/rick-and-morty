@@ -20,7 +20,7 @@ import { useStore } from "vuex";
 
 import useDebounced from "../useDebounced"
 
-const TITLE_VALIDATOR = /^[a-zA-Z0-9]/
+const TITLE_VALIDATOR = /^[a-zA-Z0-9_ ]/
 
 
 

@@ -1,6 +1,6 @@
 <template lang='pug'>
 .message-wrapper
-  .title.mobile-change
+  .title
     span  Send a new message
     
   form.form(@submit.prevent="onSubmit")
@@ -123,13 +123,16 @@ export default defineComponent({
   align-items: center;
 
   width: 100%;
-  height: auto;
+  height: 100%;
 
   .title {
     font-style: normal;
     font-weight: 300;
     font-size: 32px;
     line-height: 40px;
+
+    margin-top: 6px;
+    margin-bottom: 32px;
   }
 
   .form {
@@ -137,7 +140,7 @@ export default defineComponent({
     flex-direction: column;
     align-items: center;
     
-    border: solid 1px yellow;
+    //border: solid 1px yellow;
 
     width: 100%;
     height: 100%;
@@ -168,6 +171,8 @@ export default defineComponent({
         width: 100%;
         height: auto;
 
+        margin: 8px 0;
+
         font-style: normal;
         font-weight: 600;
         font-size: 14px;
@@ -188,7 +193,6 @@ export default defineComponent({
 
           margin-right: 9px;
 
-          
         }
         .disabled {
           background-color: var(--app-ui-lightgrey);

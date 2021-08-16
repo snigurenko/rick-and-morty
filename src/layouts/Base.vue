@@ -7,9 +7,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent} from "vue";
 
 import Header from "../components/Header.vue";
+
 
 
 
@@ -19,7 +20,7 @@ export default defineComponent({
   components: {
     Header,
   },
-});
+})
 </script>
 
 
@@ -53,11 +54,13 @@ export default defineComponent({
     max-width: 500px;
     height: 100%;
 
+    overflow-y: auto;
+
   }
 
   @media (max-width: 480px) {
     .main {
-      max-width: 390px;
+      min-width: 380px;
     }
   }
 }

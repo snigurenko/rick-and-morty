@@ -190,6 +190,12 @@ export default defineComponent({
   .fade-leave-to {
     opacity: 0;
   }
+
+  @media (max-width: 480px) {
+    .dropdown-content {
+      max-height: 171px;
+    }
+  }
 }
 
 </style>

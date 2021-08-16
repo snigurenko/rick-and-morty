@@ -18,7 +18,7 @@ import { useStore } from "vuex";
 import SelectedCharacter from '../history/SelectedCharacter.vue'
 
 export default defineComponent({
-  name: "Hiatory",
+  name: "History",
   components: {
     "selected-character": SelectedCharacter,
   },

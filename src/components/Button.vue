@@ -58,9 +58,10 @@ export default defineComponent ({
 	flex-flow: row;
 	justify-content: flex-end;
 
-
 	width: 100%;
-	height: auto;
+	height: 100%;
+
+	margin-bottom: 20px;
 
 	.button {
 		display: flex;
