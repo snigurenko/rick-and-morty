@@ -1,6 +1,6 @@
 <template lang='pug'>
 .message-wrapper
-  .title
+  .title.mobile-change
     span  Send a new message
     
   form.form(@submit.prevent="onSubmit")
@@ -78,7 +78,7 @@ export default defineComponent({
       const time = DateTime.fromISO(datestamp).toFormat("HH':'mm")
       const date = DateTime.now().toLocaleString()
       
-      const testObject = {
+      const characterObject = {
         title: `${getTitle.value}`,
         message: `${getMessage.value}`,
         date: `${date}`,
@@ -86,7 +86,7 @@ export default defineComponent({
         id: `${store.getters['history/getSelectedCharacterId']}`,
       }
       // here I use store, and not set manually localStorage, because of the plugin in root_store
-      store.commit('history/setCharacterObj', testObject)
+      store.commit('history/setCharacterObj', characterObject)
       router.push({ name: 'History' })
     };
     
@@ -123,7 +123,7 @@ export default defineComponent({
     flex-direction: column;
     align-items: center;
     
-    border: solid 1px red;
+    border: solid 1px yellow;
 
     width: 100%;
     height: 100%;

@@ -1,23 +1,26 @@
 <template lang='pug'>
 .input-title-wrapper
-	.column(:class="{error: false}")
-		label.label(for='title' ) {{label}} 
+	.column(:class="{error: error}")
+		label.label(for='title' ) {{label}}
 		input.input(
 				id='title'
 				type='text'
 				:placeholder="placeholder"
 				v-model='title'
 				maxlength="32"
-			
+				@keypress="restrictSpecialChars($event)"
+				@focusout="onBlur"
 			)
 		
 </template>
 
 <script>
-import { defineComponent, onUnmounted, watchEffect } from "vue";
+import { defineComponent, onUnmounted, watchEffect, computed, ref } from "vue";
 import { useStore } from "vuex";
 
 import useDebounced from "../useDebounced"
+
+const TITLE_VALIDATOR = /^[a-zA-Z0-9]/
 
 
 
@@ -35,16 +38,45 @@ export default defineComponent ({
 	},
 
 	setup: () => {
+		const store = useStore();
+
+		const restrictSpecialChars = ($event) => {
+			$event.charCode === 0 || TITLE_VALIDATOR.test(String.fromCharCode($event.charCode))
+			? true
+			: $event.preventDefault();
+		}
+
+		
+
+		const isTitleValid = computed( ()=> title.value.length > 2) 
+		const error = ref(false)
+
+		const onBlur = () => {
+			if (isTitleValid.value) {
+				error.value = false
+				//store.commit('history/setIsTitleError', false)
+			} else {
+				error.value = true
+			
+				}
+		}
+
+		
 
 		// as an example use useDebounced function imported from root src
 		// in ImputMessage do it without, just using input blur
-		// just want to show bouth methods
+		// here just want to show bouth methods
+
+		const title = useDebounced('', 300)
+
 		
-		const title = useDebounced('', 400)
 
-		const store = useStore();
-
-		watchEffect(() => store.commit('history/setMessageTitle', title.value))
+		watchEffect(() => {
+			store.commit('history/setMessageTitle', title.value)
+			if (title.value.length > 0) {
+				onBlur()
+			}
+		})
 
 		onUnmounted(() => { 
 			store.commit('history/setMessageTitle', '')
@@ -52,6 +84,9 @@ export default defineComponent ({
 
 		return {
 			title,
+			restrictSpecialChars,
+			onBlur,
+			error,
 		}
 	}
 })
@@ -87,11 +122,12 @@ export default defineComponent ({
 			border: solid 1px red;
 
 				&::placeholder {
-				color: red;
+				color: var(--app-ui-red-1);
+				opacity: .4;
 			}
 		}
 		
-		color: red;
+		color: var(--app-ui-red-1);
 	}
 
 }

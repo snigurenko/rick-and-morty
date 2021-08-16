@@ -1,7 +1,7 @@
 <template lang="pug">
 .select-wrapper
   .column
-    label.label {{ label }}
+    label.label {{ label }} {{selectedLabel}}
     
     // usually I prefere put img via components, it is easier to set if needed
     // I tried do so with export svg chevron pic from figma, but result was wrong, 
@@ -28,17 +28,17 @@
     transition(name="fade" mode="out-in")
       .dropdown-content(v-if="showCharacterList")
         .dropdown-item(
-            v-for="(option, index) in options"
-            :key="index"
-            @click="selectCharacter(option)"
+					v-for="(option, index) in options"
+					:key="index"
+					@click="selectCharacter(option)"
         )
-            .row
+          .row
             span  {{ option.label }}
 
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, onBeforeMount } from "vue";
 import { useStore } from "vuex";
 
 
@@ -71,6 +71,11 @@ export default defineComponent({
   },
 
   setup: () => {
+
+		onBeforeMount(()=>{
+			store.commit('history/setSelectedCharacterId', null)
+		})
+
     const store = useStore();
     const showCharacterList = ref(false)
     const selectedLabel = ref('')

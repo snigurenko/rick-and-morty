@@ -2,14 +2,16 @@
 .button-wrapper
   button.button(
   type="submit"
-	:disabled="disabled"
+	:disabled="isButtonDisabled"
   ) {{label}} 
   
 </template>
 
 <script>
+import { defineComponent, computed, ref, watchEffect, onMounted } from "vue";
+import { useStore } from "vuex";
 
-export default {
+export default defineComponent ({
   name: 'Button',
   props: {
     label : {
@@ -19,9 +21,36 @@ export default {
 		disabled: {
 			type: Boolean,
 			default: false,
+		},
+  },
+
+	setup: () => {
+		const store = useStore();
+		const isButtonDisabled = ref(true)  
+		const selectedCharacterId = computed(() => store.getters['history/getSelectedCharacterId'])
+		const messageContent = computed(() => store.getters['history/getMessage'])
+		
+		const getMsgTitle = computed(() => store.getters['history/getMessageTitle'])
+
+		onMounted(()=>{
+			console.log('selectedCharacterId', selectedCharacterId)
+			console.log('getMessageTitle', getMsgTitle)
+			console.log('messageContent', messageContent)
+		})
+		watchEffect(() => {
+			//debugger
+			if ( selectedCharacterId.value === null || getMsgTitle.value.length < 3 || messageContent.value.length < 2) {
+				isButtonDisabled.value = true
+			} else {isButtonDisabled.value = false}
+			
+		})
+
+		return {
+			isButtonDisabled,
 		}
-  }
-}
+	}
+
+})
 </script>
 <style scoped lang="scss">
 .button-wrapper {

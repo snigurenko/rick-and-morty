@@ -8,13 +8,13 @@
 			:placeholder="placeholder"
 			v-model='message'
 			maxlength="256"
-			@blur="onBlur"
+			@keyup="onKeyUp"
 		)
 		
 </template>
 
 <script>
-import { defineComponent, ref, onUnmounted } from "vue";
+import { defineComponent, ref, onUnmounted, onBeforeMount } from "vue";
 import { useStore } from "vuex";
 
 
@@ -33,6 +33,11 @@ export default defineComponent ({
 	},
 
 	setup: () => {
+
+		onBeforeMount(()=>{
+			store.commit('history/setMessage', '')
+		})
+		
 		const message = ref('')
 
 		const store = useStore();
@@ -41,14 +46,13 @@ export default defineComponent ({
 			store.commit('history/setMessageTitle', '')
 		});
 
-		const onBlur = () => {
-			console.log('blur')
+		const onKeyUp = () => {
 			store.commit('history/setMessage', message.value)
 		}
 
 		return {
 			message,
-			onBlur,
+			onKeyUp,
 		}
 	}	
 

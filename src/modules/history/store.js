@@ -15,47 +15,38 @@
       getCharacterList (state) {
         return state.characterList
       },
-
       getCharacterObj (state) {
         return state.characterObj
       }, 
-
       getSelectedCharacterId (state) {
         return state.selectedCharacterId
       },
-
       getMessageTitle (state) {
         return state.messageTitle
       },
-
       getMessage (state) {
         return state.message
       },
-
     },
   
     mutations: {
       setCharacterList (state, payload) {
         state.characterList = payload
       },
-
       setCharacterObj (state, obj) {
         state.characterObj.push(obj)
       },
-
       setSelectedCharacterId (state, payload) {
         state.selectedCharacterId = payload
       },
-      
       setMessageTitle (state, payload) {
         state.messageTitle = payload
       },
-
       setMessage (state, payload) {
         state.message = payload
       },
-
     },
+    
     actions: {
       fetchCharacter: async ({ commit }) => {
         // debugger

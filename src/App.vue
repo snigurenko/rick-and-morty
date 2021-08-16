@@ -22,16 +22,13 @@ export default {
 
   --app-ui-blue-1: #4EADC5;
   --app-ui-blue-: #0099cc;
+
+  --app-ui-red-1: #DE212B;
   
   --app-ui-lightgrey: #E0E0E0;
   --app-ui-grey-1: #F4F4F4;
 
-
-
-
   --app-mobile-width: 480px;
-
-
 }
 
 * {
