@@ -9,6 +9,7 @@
 			v-model='message'
 			maxlength="256"
 			@keyup="onKeyUp"
+			autocomplete="off"
 		)
 		
 </template>

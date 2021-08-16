@@ -13,15 +13,20 @@
       rm-input-message.input-message(
         placeholder='Enter the message here...'
       )
-          
     
     .form-row
       rm-select(
         label='Character'
         placeholder='Pick a character'
         :options="characterList"
-        autocomplete="off"
+        
       ).select
+
+    .form-row
+      .inter-galaxy(@click='checkIntergalaxy')
+        .checkbox(:class="{disabled : !InterGalaxy}")
+          img(src="../../assets/icons/Checkpoint.svg" v-if="InterGalaxy") 
+        span I want to use InterGalaxy Quickpos&trade;
     
     .form-row
       rm-button(
@@ -63,6 +68,8 @@ export default defineComponent({
    
     const message = ref('')
     const disabled = ref(false)
+
+    const InterGalaxy = ref(false)
     
     // here will be just 'name' and 'id'
     // and I throw it to the select component as a props
@@ -83,12 +90,17 @@ export default defineComponent({
         message: `${getMessage.value}`,
         date: `${date}`,
         time: `${time}`,
+        intergalaxy: `${InterGalaxy.value}`,
         id: `${store.getters['history/getSelectedCharacterId']}`,
       }
       // here I use store, and not set manually localStorage, because of the plugin in root_store
       store.commit('history/setCharacterObj', characterObject)
       router.push({ name: 'History' })
     };
+
+    const checkIntergalaxy = () => {
+      InterGalaxy.value = !InterGalaxy.value
+    }
     
     return {
       characterList,
@@ -96,6 +108,8 @@ export default defineComponent({
       message,
       onSubmit,
       disabled,
+      checkIntergalaxy,
+      InterGalaxy,
     };
   },
 });
@@ -143,6 +157,43 @@ export default defineComponent({
       .input-title, .input-message, .select {
         display: block;
         width: 100%;
+      }
+
+      .inter-galaxy {
+        display: flex;
+        flex-flow: row;
+        justify-content: start;
+        align-items: center;
+
+        width: 100%;
+        height: auto;
+
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 10px;
+
+        .checkbox {
+          display: flex;
+          flex-flow: row;
+          justify-content: center;
+          align-items: center;
+
+          width: 24px;
+          height: 24px;
+
+          background-color: var(--app-ui-blue-1);
+
+          border-radius: 4px;
+
+          margin-right: 9px;
+
+          
+        }
+        .disabled {
+          background-color: var(--app-ui-lightgrey);
+        }
+
       }
     }
   }
