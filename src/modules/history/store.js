@@ -1,5 +1,4 @@
   import axios from "axios";
-
   
   const history = {
     namespaced: true,
@@ -10,7 +9,6 @@
       currentCharacter: null,
       messageTitle: '',
       message: '',
-
       objLength: null,
       msgSentWell: false,
     },
@@ -67,17 +65,15 @@
         // debugger
         try {
           const response = await axios.get("https://rickandmortyapi.com/api/character");
-  
           if (response.status === 200) {
-            
             // make new array with limited data, potentially if received response will 
             // contain a lot of data, there is no need to pull it through components
             const limitedDataCharacter = response.data.results.map(
-                (character) => ({
-                    label: character.name,
-                    id: character.id,
-                })
-              )
+							(character) => ({
+									label: character.name,
+									id: character.id,
+							})
+						)
             commit("setCharacterList", limitedDataCharacter);
           }
         } catch (e) {

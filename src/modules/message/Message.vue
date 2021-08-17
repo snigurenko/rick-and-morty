@@ -1,7 +1,7 @@
 <template lang='pug'>
 .message-wrapper
   .title
-    span  Send a new message
+    span Send a new message
     
   form.form(@submit.prevent="onSubmit")
     .form-row
@@ -19,11 +19,11 @@
         label='Character'
         placeholder='Pick a character'
         :options="characterList"
-        
       ).select
 
     .form-row
-      // sorry, Have no time to make a component, want to sent it today, bacause next few days will fly away 
+      // sorry, Have no time to make a component, want to sent it today, bacause next few days will fly away
+      // will change next week, this project will stay as my vue3 portfolio :)
       .inter-galaxy(@click='checkIntergalaxy')
         .checkbox(:class="{disabled : !InterGalaxy}")
           img(src="../../assets/icons/Checkpoint.svg" v-if="InterGalaxy") 
@@ -58,8 +58,6 @@ export default defineComponent({
     "rm-input-message": InputMessage,
   },
   setup: () => {
-    
-    
     onMounted(()=> {
       // do it now to avoid possible delays in the response from the server side 
       // when opening the select list
@@ -74,7 +72,6 @@ export default defineComponent({
       const temp  = getCharacterObj.value.length
       store.commit('history/setObjLength', temp)
     }
-
 
     const store = useStore();
    
@@ -126,7 +123,6 @@ export default defineComponent({
     };
   },
 });
-
 </script>
 
 <style scoped lang="scss">
@@ -143,7 +139,6 @@ export default defineComponent({
     font-weight: 300;
     font-size: 32px;
     line-height: 40px;
-
     margin-top: 12px;
     margin-bottom: 19px;
   }
@@ -156,7 +151,6 @@ export default defineComponent({
     width: 100%;
     height: 100%;
     
-
     .form-row {
       display: flex;
       flex-direction: column;
@@ -203,13 +197,12 @@ export default defineComponent({
           border-radius: 4px;
 
           margin-right: 9px;
-
         }
+
         .disabled {
           background: var(--app-ui-bg-white);
           border: 1px solid var(--app-ui-grey-2);
         }
-
       }
     }
   }

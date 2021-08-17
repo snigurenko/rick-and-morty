@@ -10,7 +10,7 @@
       v-for="obj, index in retrievedObject.slice().reverse()",
       :obj='obj',
       :key='index'
-      )
+      ).selected-character
 
 </template>
 
@@ -28,6 +28,7 @@ export default defineComponent({
   setup: () => {
     const store = useStore();
 
+    // check if new message was added via length
     onBeforeMount(()=>{
       CharacterObj.value.length > OldObjLength.value
       ? store.commit('history/setMsgSentWell', true)
@@ -41,18 +42,13 @@ export default defineComponent({
 
     const confirmation = computed(()=> store.getters['history/getMsgSentWell'])
 
-
-
-    
-  
     // Sure it's possible to use imperative method and set localStorage 'by hand', 
     // but why, if I can use plugin and project conditions will be complit too
-    
+    // example part of the code: 
     // onMounted(()=> {
     //   // const temp  = localStorage.getItem('testObject')
     //   // retrievedObject.value = JSON.parse(temp)
     // })
-
     // let retrievedObject = ref({})
 
     const retrievedObject = computed(
@@ -76,12 +72,17 @@ export default defineComponent({
   width: 100%;
   height: 100%;
 
+  .selected-character:last-child {
+    padding-bottom: 32px;
+  }
+
   .title {
     font-weight: 300;
     font-size: 32px;
     line-height: 40px;
 
-    margin: 32px 0 50px;
+    margin-top: 12px;
+    margin-bottom: 32px;
   }
 
   .confirmation {
@@ -92,6 +93,15 @@ export default defineComponent({
     color: var(--app-ui-green);
 
     margin-top: 4px;
+
+    .title{
+      font-style: normal;
+      font-weight: 300;
+      font-size: 32px;
+      line-height: 40px;
+      margin-top: 12px;
+      margin-bottom: 19px;
+    }
 
     img {
       width: 22px;

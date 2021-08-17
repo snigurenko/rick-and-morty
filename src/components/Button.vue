@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { defineComponent, computed, ref, watchEffect, onMounted } from "vue";
+import { defineComponent, computed, ref, watchEffect } from "vue";
 import { useStore } from "vuex";
 
 export default defineComponent ({
@@ -32,17 +32,10 @@ export default defineComponent ({
 		
 		const getMsgTitle = computed(() => store.getters['history/getMessageTitle'])
 
-		onMounted(()=>{
-			console.log('selectedCharacterId', selectedCharacterId)
-			console.log('getMessageTitle', getMsgTitle)
-			console.log('messageContent', messageContent)
-		})
 		watchEffect(() => {
-			//debugger
-			if ( selectedCharacterId.value === null || getMsgTitle.value.length < 3 || messageContent.value.length < 2) {
-				isButtonDisabled.value = true
-			} else {isButtonDisabled.value = false}
-			
+			isButtonDisabled.value = ( 
+				selectedCharacterId.value === null || getMsgTitle.value.length < 3 || messageContent.value.length < 2
+				)
 		})
 
 		return {

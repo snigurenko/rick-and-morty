@@ -54,11 +54,10 @@ export default defineComponent ({
 		const onBlur = () => {
 			if (isTitleValid.value) {
 				error.value = false
-				//store.commit('history/setIsTitleError', false)
 			} else {
 				error.value = true
 			
-				}
+			}
 		}
 
 		

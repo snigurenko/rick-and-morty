@@ -20,22 +20,12 @@
 </template>
 
 <script>
-import { defineComponent, onMounted, computed } from "vue";
+import { defineComponent, computed } from "vue";
 import router from "../router.js";
-
-import { useRoute } from "vue-router";
-
-
 
 export default defineComponent({
   name: 'Header',
   setup: () => {
-    const route = useRoute();
-
-    onMounted(()=> {
-      console.log('route', route)
-    })
-
     const currentRoute = computed(()=> router.currentRoute.value.name)
 
     const pushItem = (value) => {

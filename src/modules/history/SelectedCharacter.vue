@@ -1,41 +1,37 @@
 <template lang='pug'>
 .selected-history-wrapper
-  .history-item(
-    @click="changeToogle"
-    :class="{ active: toogle}"
-    )
-    .item-title
-      span {{obj.title}}
-      img(
-        alt="Chevron" 
-        src="../../assets/icons/Chevron.svg"
-        :class="{ rotate: toogle, chevron: !toogle }"
+  transition(name="fade" mode="out-in")
+    .history-item(
+      @click="changeToogle"
+      :class="{ active: toogle}"
       )
-    .item-content(v-if="toogle && currentCharacter")
-      .details  
-        .char-img
-          img(:src="currentCharacter.image")
-        .char-details
-          span Sent to: {{currentCharacter.name}}
-          span Date: {{obj.date}}
-          span At: {{obj.time}}
-        .quickpost(v-if="intergalaxy")
-          img(src="../../assets/icons/IntergalaxyMark.svg" style="margin: 0 5px;")
-          span Using Quickpost&trade;
-      .message
-        span {{obj.message}}
-   
+      .item-title
+        span {{obj.title}}
+        img(
+          alt="Chevron" 
+          src="../../assets/icons/Chevron.svg"
+          :class="{ rotate: toogle, chevron: !toogle }"
+        )
+      .item-content(v-if="toogle && currentCharacter")
+        .details  
+          .char-img
+            img(:src="currentCharacter.image")
+          .char-details
+            span Sent to: {{currentCharacter.name}}
+            span Date: {{obj.date}}
+            span At: {{obj.time}}
+          .quickpost(v-if="intergalaxy")
+            img(src="../../assets/icons/IntergalaxyMark.svg" style="margin: 0 5px;")
+            span Using Quickpost&trade;
+        .message
+          span {{obj.message}}
   
 </template>
 
 <script>
 import { defineComponent, ref, computed } from "vue";
 
-
 import axios from "axios";
-
-
-
 
 export default defineComponent({
   name: "SelectedCharacter",
@@ -65,7 +61,6 @@ export default defineComponent({
         const url = `https://rickandmortyapi.com/api/character/${id}`
         try {
             const response = await axios.get(url);
-    
             if (response.status === 200) {
                 currentCharacter.value = response.data
             }
@@ -92,8 +87,6 @@ export default defineComponent({
   width: 100%;
   height: auto;
 
- 
-
   .history-item {
     display: flex;
     flex-direction: column;
@@ -102,9 +95,6 @@ export default defineComponent({
     width: 100%;
     height: 50px;
     
-    
-    //transition: height 0.3s ease;
-
     border-bottom: solid 1px var(--app-ui-lightgrey);
 
     .item-title {
@@ -124,8 +114,6 @@ export default defineComponent({
         width: 12px;
         height: 12px;
       }
-
-      
     }
 
     .item-content {
@@ -161,8 +149,6 @@ export default defineComponent({
           width: 100%;
           height: 48px;
 
-          
-
           font-size: 14px;
           line-height: 10px;
         }
@@ -182,20 +168,12 @@ export default defineComponent({
         font-size: 16px;
         line-height: 20px;
       }
-      
     }
   }
 
   .active {
-    display: block;
-
     height: 100%;
-    
-
-    // transition: all 0.3s ease;
   }
-
-
 
   .chevron, .rotate  {
     position: relative;
@@ -212,5 +190,6 @@ export default defineComponent({
     transition: transform 0.5s ease;
     transform: rotate(360deg);
   }
+
 }
 </style>
