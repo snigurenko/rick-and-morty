@@ -74,13 +74,13 @@ export default defineComponent ({
 	.label {
 		font-size: 16px;
 		line-height: 20px;
-		margin-bottom: 12px;
+		margin-bottom: 10px;
   }
 
 	.input {
     @include input;
 
-		align-items: start;
+		align-items: flex-start;
 
 		height: 140px;
 
@@ -100,8 +100,8 @@ export default defineComponent ({
 			top: 8px;
 
 			display: flex;
-			flex-flow: row;
-			justify-content: start;
+			flex-direction: row;
+			justify-content: flex-start;
 
 			color: var(--app-ui-lightgrey);
 		}

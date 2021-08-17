@@ -12,7 +12,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap');
 
 :root {
   --app-ui-bg-white: #ffffff;
@@ -24,6 +24,8 @@ export default {
   --app-ui-blue-: #0099cc;
 
   --app-ui-red-1: #DE212B;
+
+  --app-ui-green: #50C878;
   
   --app-ui-lightgrey: #E0E0E0;
   --app-ui-grey-1: #F4F4F4;

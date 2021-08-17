@@ -78,9 +78,11 @@ export default defineComponent({
     justify-content: space-between;
 
     width: 100%;
-    max-width: 1000px;
+    max-width: 996px;
     min-width: 380px;
     height: auto;
+
+    padding: 0 1px;
 
     .menu-items {
       display: flex;
@@ -89,13 +91,13 @@ export default defineComponent({
 
       width: 100%;
 
-      margin-right: -64px;
+      margin-right: -74px;
 
       .item{
         background-color: var(--app-ui-bg-white);
         color: var(--app-ui-darkblue);
 
-        padding: 6px 17px;
+        padding: 6px 16px;
         margin-top: 32px;
         
         // I know that it is not a good practice to use 'all' 

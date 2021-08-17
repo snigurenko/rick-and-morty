@@ -115,7 +115,9 @@ export default defineComponent({
   .label {
     font-size: 16px;
     line-height: 20px;
-    margin-bottom: 12px;
+    
+    margin-top: 2px;
+    margin-bottom: 9px;
   }
   
   .input {
@@ -161,8 +163,8 @@ export default defineComponent({
 
     display: block;
 
-    top: 44px;
-    right: 19px;
+    top: 43px;
+    right: 20px;
 
     pointer-events: none;
 
@@ -195,7 +197,7 @@ export default defineComponent({
     .dropdown-content {
       max-height: 171px;
     }
-    @include media-label;
+    // @include media-label;
   }
 }
 

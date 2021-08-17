@@ -106,7 +106,7 @@ export default defineComponent ({
 	.label {
 		font-size: 16px;
 		line-height: 20px;
-		margin-bottom: 12px;
+		margin-bottom: 10px;
   }
 
 	.input {

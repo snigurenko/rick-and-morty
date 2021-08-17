@@ -135,7 +135,7 @@ export default defineComponent({
       .details {
         display: flex;
         align-items: flex-start;
-        justify-content: start;
+        justify-content: flex-start;
 
         width: 100%;
         height: auto;

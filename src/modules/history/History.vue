@@ -1,5 +1,8 @@
 <template lang='pug'>
 .history-wrapper
+  .confirmation(v-if='confirmation') 
+    span Message sent successfully
+    img(src='../../assets/icons/IntergalaxyMark.svg' style="margin: 0 5px;")
   .title Message history
   .row(v-if='retrievedObject')
     
@@ -12,7 +15,7 @@
 </template>
 
 <script>
-import { defineComponent, computed } from "vue";
+import { defineComponent, computed, onBeforeMount } from "vue";
 import { useStore } from "vuex";
 
 import SelectedCharacter from '../history/SelectedCharacter.vue'
@@ -24,6 +27,23 @@ export default defineComponent({
   },
   setup: () => {
     const store = useStore();
+
+    onBeforeMount(()=>{
+      CharacterObj.value.length > OldObjLength.value
+      ? store.commit('history/setMsgSentWell', true)
+      : store.commit('history/setMsgSentWell', false)
+      
+      store.commit('history/setObjLength', CharacterObj.value.length)
+    })
+
+    const OldObjLength = computed(()=> store.getters['history/getObjLength'])
+    const CharacterObj = computed(()=> store.getters['history/getCharacterObj'])
+
+    const confirmation = computed(()=> store.getters['history/getMsgSentWell'])
+
+
+
+    
   
     // Sure it's possible to use imperative method and set localStorage 'by hand', 
     // but why, if I can use plugin and project conditions will be complit too
@@ -41,6 +61,7 @@ export default defineComponent({
 
     return {
       retrievedObject,
+      confirmation,
     }
   }
 })
@@ -61,6 +82,37 @@ export default defineComponent({
     line-height: 40px;
 
     margin: 32px 0 50px;
+  }
+
+  .confirmation {
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 40px;
+
+    color: var(--app-ui-green);
+
+    margin-top: 4px;
+
+    img {
+      width: 22px;
+      height: 18px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .title {
+   
+      font-size: 24px;
+      line-height: 30px;
+
+      margin: 24px 0 50px;
+    }
+
+  .confirmation {
+  
+    font-size: 24px;
+    line-height: 30px;
+  }
   }
 }
 </style>

@@ -23,6 +23,7 @@
       ).select
 
     .form-row
+      // sorry, Have no time to make a component, want to sent it today, bacause next few days will fly away 
       .inter-galaxy(@click='checkIntergalaxy')
         .checkbox(:class="{disabled : !InterGalaxy}")
           img(src="../../assets/icons/Checkpoint.svg" v-if="InterGalaxy") 
@@ -58,11 +59,22 @@ export default defineComponent({
   },
   setup: () => {
     
-    // do it now to avoid possible delays in the response from the server side 
-    // when opening the select list
+    
     onMounted(()=> {
+      // do it now to avoid possible delays in the response from the server side 
+      // when opening the select list
       store.dispatch('history/fetchCharacter')
+
+      SetObjLength()
     })
+
+    const getCharacterObj = computed(()=> store.getters['history/getCharacterObj'])
+
+    const SetObjLength = ()=> {
+      const temp  = getCharacterObj.value.length
+      store.commit('history/setObjLength', temp)
+    }
+
 
     const store = useStore();
    
@@ -95,6 +107,7 @@ export default defineComponent({
       }
       // here I use store, and not set manually localStorage, because of the plugin in root_store
       store.commit('history/setCharacterObj', characterObject)
+      
       router.push({ name: 'History' })
     };
 
@@ -131,8 +144,8 @@ export default defineComponent({
     font-size: 32px;
     line-height: 40px;
 
-    margin-top: 6px;
-    margin-bottom: 32px;
+    margin-top: 12px;
+    margin-bottom: 19px;
   }
 
   .form {
@@ -140,8 +153,6 @@ export default defineComponent({
     flex-direction: column;
     align-items: center;
     
-    //border: solid 1px yellow;
-
     width: 100%;
     height: 100%;
     
@@ -154,7 +165,7 @@ export default defineComponent({
       width: 100%;
 
       &:not(:last-child) {
-        margin-bottom: 24px;
+        margin-bottom: 25px;
       }
 
       .input-title, .input-message, .select {
@@ -165,7 +176,7 @@ export default defineComponent({
       .inter-galaxy {
         display: flex;
         flex-flow: row;
-        justify-content: start;
+        justify-content: flex-start;
         align-items: center;
 
         width: 100%;

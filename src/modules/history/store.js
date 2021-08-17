@@ -10,6 +10,9 @@
       currentCharacter: null,
       messageTitle: '',
       message: '',
+
+      objLength: null,
+      msgSentWell: false,
     },
     getters: {
       getCharacterList (state) {
@@ -26,6 +29,12 @@
       },
       getMessage (state) {
         return state.message
+      },
+      getObjLength (state) {
+        return state.objLength
+      },
+      getMsgSentWell (state) {
+        return state.msgSentWell
       },
     },
   
@@ -44,6 +53,12 @@
       },
       setMessage (state, payload) {
         state.message = payload
+      },
+      setObjLength(state, payload) {
+        state.objLength = payload
+      },
+      setMsgSentWell(state, payload) {
+        state.msgSentWell = payload
       },
     },
     
