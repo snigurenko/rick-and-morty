@@ -130,6 +130,10 @@ export default defineComponent ({
 		color: var(--app-ui-red-1);
 	}
 
+	@media (max-width: 480px) {
+    @include media-label;
+  }
+
 }
 </style>
 

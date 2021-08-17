@@ -27,6 +27,10 @@ export default {
   
   --app-ui-lightgrey: #E0E0E0;
   --app-ui-grey-1: #F4F4F4;
+  --app-ui-grey-2: #D6DBE4;
+  --app-ui-grey-3: #C4C4C4;
+
+
 
   --app-mobile-width: 480px;
 }

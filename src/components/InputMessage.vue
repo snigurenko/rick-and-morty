@@ -119,6 +119,10 @@ export default defineComponent ({
 		color: red;
 	}
 
+	@media (max-width: 480px) {
+    @include media-label;
+  }
+
 }
 </style>
 

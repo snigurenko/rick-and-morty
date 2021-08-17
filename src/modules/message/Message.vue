@@ -195,7 +195,8 @@ export default defineComponent({
 
         }
         .disabled {
-          background-color: var(--app-ui-lightgrey);
+          background: var(--app-ui-bg-white);
+          border: 1px solid var(--app-ui-grey-2);
         }
 
       }

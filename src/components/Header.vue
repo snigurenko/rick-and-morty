@@ -89,13 +89,13 @@ export default defineComponent({
 
       width: 100%;
 
-      margin-right: -25px;
+      margin-right: -64px;
 
       .item{
         background-color: var(--app-ui-bg-white);
         color: var(--app-ui-darkblue);
 
-        padding: 10px 16px;
+        padding: 6px 17px;
         margin-top: 32px;
         
         // I know that it is not a good practice to use 'all' 
@@ -109,12 +109,14 @@ export default defineComponent({
         color: var(--app-ui-bg-white);
 
         transition: all 0.3s ease;
+        
       }
     }
 
-    @media (max-width: 1050px) {
+    @media (max-width: 1160px) {
       .menu-items {
-         margin: 0 20px;
+         margin-right: 20px;
+         margin-bottom: -1px;
       }
     }
   }

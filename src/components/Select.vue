@@ -1,7 +1,7 @@
 <template lang="pug">
 .select-wrapper
   .column
-    label.label {{ label }} {{selectedLabel}}
+    label.label {{ label }}
     
     // usually I prefere put img via components, it is easier to set if needed
     // I tried do so with export svg chevron pic from figma, but result was wrong, 
@@ -195,6 +195,7 @@ export default defineComponent({
     .dropdown-content {
       max-height: 171px;
     }
+    @include media-label;
   }
 }
 
