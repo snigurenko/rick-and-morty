@@ -11,6 +11,8 @@
       @keypress="restrictSpecialChars($event)"
       @focusout="onBlur"
     )
+  .error(v-if="error")
+    span Please enter the title
 
 </template>
 
@@ -108,16 +110,28 @@ export default defineComponent ({
   }
 
   .error {
-    .input {
-      border: solid 1px red;
 
-        &::placeholder {
+    font-size: 12px;
+    line-height: 15px;
+
+    color: var(--app-ui-red-1);
+
+    span {
+      opacity: 0.6;
+    }
+
+    .input {
+      border: solid 1px var(--app-ui-red-1);
+
+      margin-bottom: 6px;
+
+      &::placeholder {
         color: var(--app-ui-red-1);
         opacity: .4;
       }
     }
 
-    color: var(--app-ui-red-1);
+    
   }
 
   @media (max-width: 480px) {

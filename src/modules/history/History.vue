@@ -3,8 +3,8 @@
   .confirmation(v-if='confirmation')
     span Message sent successfully
     img(src='../../assets/icons/IntergalaxyMark.svg' style="margin: 0 5px;")
-  .title Message history
-  .row(v-if='retrievedObject')
+  .title 
+    span Message history
 
   selected-character(
     v-for="obj, index in retrievedObject.slice().reverse()",
@@ -82,7 +82,7 @@ export default defineComponent({
     line-height: 40px;
 
     margin-top: 12px;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
   }
 
   .confirmation {
@@ -99,6 +99,7 @@ export default defineComponent({
       font-weight: 300;
       font-size: 32px;
       line-height: 40px;
+
       margin-top: 12px;
       margin-bottom: 19px;
     }
