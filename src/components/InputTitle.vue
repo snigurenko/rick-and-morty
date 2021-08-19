@@ -98,6 +98,7 @@ export default defineComponent ({
   .label {
     font-size: 16px;
     line-height: 20px;
+
     margin-bottom: 10px;
   }
 
@@ -117,20 +118,23 @@ export default defineComponent ({
     color: var(--app-ui-red-1);
 
     span {
+      position: absolute;
       opacity: 0.6;
     }
 
     .input {
       border: solid 1px var(--app-ui-red-1);
 
-      margin-bottom: 6px;
+      margin-bottom: 5px;
 
       &::placeholder {
         color: var(--app-ui-red-1);
         opacity: .4;
       }
     }
-
+    .label {
+      margin-bottom: 8px;
+    }
     
   }
 
