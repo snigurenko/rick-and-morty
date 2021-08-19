@@ -2,7 +2,7 @@
 // usually, I put one store file to each module
 // that because I use modules
 
-import { createStore, createLogger } from "vuex";
+import { createStore } from "vuex";
 import createPersistedState from "vuex-persistedstate";
 
 import history from './modules/history/store'
@@ -17,9 +17,9 @@ const plugins = [
 
 // On to see store interactions, I used during developing (should import createLogger from vuex)
 //
-if (process.env.NODE_ENV !== "production") {
-  plugins.push(createLogger({}));
-}
+// if (process.env.NODE_ENV !== "production") {
+// 	plugins.push(createLogger({}));
+// }
 
 export default createStore({
   plugins,

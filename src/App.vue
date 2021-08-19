@@ -21,7 +21,7 @@ export default {
   --app-ui-darkblue: #324B72;
 
   --app-ui-blue-1: #4EADC5;
-  --app-ui-blue-: #0099cc;
+  --app-ui-blue-2: #0099cc;
 
   --app-ui-red-1: #DE212B;
 

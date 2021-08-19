@@ -116,8 +116,8 @@ export default defineComponent({
     
     // that's caused not use v-model in input component, I show it here as an option
     const setMessage = (e) => {
-			store.commit('history/setMessage', e.target.value)
-		}
+      store.commit('history/setMessage', e.target.value)
+    }
     
     return {
       characterList,

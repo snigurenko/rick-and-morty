@@ -27,9 +27,9 @@
     transition(name="fade" mode="out-in")
       .dropdown-content(v-if="showCharacterList")
         .dropdown-item(
-					v-for="(option, index) in options"
-					:key="index"
-					@click="selectCharacter(option)"
+          v-for="(option, index) in options"
+          :key="index"
+          @click="selectCharacter(option)"
         )
           .row
             span  {{ option.label }}
@@ -64,9 +64,9 @@ export default defineComponent({
 
   setup: () => {
 
-		onBeforeMount(()=>{
-			store.commit('history/setSelectedCharacterId', null)
-		})
+    onBeforeMount(()=>{
+      store.commit('history/setSelectedCharacterId', null)
+    })
 
     const store = useStore();
     const showCharacterList = ref(false)

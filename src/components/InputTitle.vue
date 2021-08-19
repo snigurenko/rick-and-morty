@@ -1,16 +1,16 @@
 <template lang='pug'>
 .input-title-wrapper
-	.column(:class="{error}")
-		label.label(for='title' ) {{label}}
-		input.input(
-			id='title'
-			type='text'
-			:placeholder="placeholder"
-			v-model='title'
-			maxlength="32"
-			@keypress="restrictSpecialChars($event)"
-			@focusout="onBlur"
-		)
+  .column(:class="{error}")
+    label.label(for='title' ) {{label}}
+    input.input(
+      id='title'
+      type='text'
+      :placeholder="placeholder"
+      v-model='title'
+      maxlength="32"
+      @keypress="restrictSpecialChars($event)"
+      @focusout="onBlur"
+    )
 
 </template>
 
@@ -24,103 +24,103 @@ const TITLE_VALIDATOR = /^[a-zA-Z0-9_ ]/
 
 export default defineComponent ({
   name: 'input-title',
-	props: {
-		label: {
-			type: String,
-			default: 'Title',
-		},
-		placeholder: {
+  props: {
+    label: {
+      type: String,
+      default: 'Title',
+    },
+    placeholder: {
       type: String,
       default: "",
     },
-	},
+  },
 
-	setup: () => {
-		const store = useStore();
+  setup: () => {
+    const store = useStore();
 
-		const restrictSpecialChars = ($event) => {
-			$event.charCode === 0 || TITLE_VALIDATOR.test(String.fromCharCode($event.charCode))
-			? true
-			: $event.preventDefault();
-		}
+    const restrictSpecialChars = ($event) => {
+      $event.charCode === 0 || TITLE_VALIDATOR.test(String.fromCharCode($event.charCode))
+      ? true
+      : $event.preventDefault();
+    }
 
-		const isTitleValid = computed( ()=> title.value.length > 2)
-		const error = ref(false)
+    const isTitleValid = computed( ()=> title.value.length > 2)
+    const error = ref(false)
 
-		const onBlur = () => {
-			if (isTitleValid.value) {
-				error.value = false
-			} else {
-				error.value = true
+    const onBlur = () => {
+      if (isTitleValid.value) {
+        error.value = false
+      } else {
+        error.value = true
 
-			}
-		}
+      }
+    }
 
-		// as an example use useDebounced function imported from root src
-		// in ImputMessage do it without, just using @input
-		// here just want to show bouth methods
-		const title = useDebounced('', 300)
+    // as an example use useDebounced function imported from root src
+    // in ImputMessage do it without, just using @input
+    // here just want to show bouth methods
+    const title = useDebounced('', 300)
 
-		watchEffect(() => {
-			store.commit('history/setMessageTitle', title.value)
-			if (title.value.length > 0) {
-				onBlur()
-			}
-		})
+    watchEffect(() => {
+      store.commit('history/setMessageTitle', title.value)
+      if (title.value.length > 0) {
+        onBlur()
+      }
+    })
 
-		onUnmounted(() => {
-			store.commit('history/setMessageTitle', '')
-		});
+    onUnmounted(() => {
+      store.commit('history/setMessageTitle', '')
+    });
 
-		return {
-			title,
-			restrictSpecialChars,
-			onBlur,
-			error,
-		}
-	}
+    return {
+      title,
+      restrictSpecialChars,
+      onBlur,
+      error,
+    }
+  }
 })
 </script>
 <style scoped lang="scss">
 @import '../styles/mixin.scss';
 
 .input-title-wrapper {
-	position: relative;
+  position: relative;
 
-	display: flex;
-	flex-flow: row;
+  display: flex;
+  flex-flow: row;
 
-	width: 100%;
-	height: auto;
+  width: 100%;
+  height: auto;
 
-	.label {
-		font-size: 16px;
-		line-height: 20px;
-		margin-bottom: 10px;
+  .label {
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 10px;
   }
 
-	.input {
+  .input {
     @include input;
 
-		&::placeholder {
+    &::placeholder {
       color: var(--app-ui-lightgrey);
     }
   }
 
-	.error {
-		.input {
-			border: solid 1px red;
+  .error {
+    .input {
+      border: solid 1px red;
 
-				&::placeholder {
-				color: var(--app-ui-red-1);
-				opacity: .4;
-			}
-		}
+        &::placeholder {
+        color: var(--app-ui-red-1);
+        opacity: .4;
+      }
+    }
 
-		color: var(--app-ui-red-1);
-	}
+    color: var(--app-ui-red-1);
+  }
 
-	@media (max-width: 480px) {
+  @media (max-width: 480px) {
     @include media-label;
   }
 

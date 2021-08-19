@@ -2,7 +2,7 @@
 .button-wrapper
   button.button(
   type="submit"
-	:disabled="isButtonDisabled"
+  :disabled="isButtonDisabled"
   ) {{label}} 
   
 </template>
@@ -18,81 +18,81 @@ export default defineComponent ({
       type: String,
       default: 'Send',
     },
-		disabled: {
-			type: Boolean,
-			default: false,
-		},
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
 
-	setup: () => {
-		const store = useStore();
-		const isButtonDisabled = ref(true)  
-		const selectedCharacterId = computed(() => store.getters['history/getSelectedCharacterId'])
-		const messageContent = computed(() => store.getters['history/getMessage'])
-		
-		const getMsgTitle = computed(() => store.getters['history/getMessageTitle'])
+  setup: () => {
+    const store = useStore();
+    const isButtonDisabled = ref(true)  
+    const selectedCharacterId = computed(() => store.getters['history/getSelectedCharacterId'])
+    const messageContent = computed(() => store.getters['history/getMessage'])
+    
+    const getMsgTitle = computed(() => store.getters['history/getMessageTitle'])
 
-		watchEffect(() => {
-			isButtonDisabled.value = ( 
-				selectedCharacterId.value === null || getMsgTitle.value.length < 3 || messageContent.value.length < 2
-				)
-		})
+    watchEffect(() => {
+      isButtonDisabled.value = ( 
+        selectedCharacterId.value === null || getMsgTitle.value.length < 3 || messageContent.value.length < 2
+        )
+    })
 
-		return {
-			isButtonDisabled,
-		}
-	}
+    return {
+      isButtonDisabled,
+    }
+  }
 
 })
 </script>
 <style scoped lang="scss">
 .button-wrapper {
-	display: flex;
-	flex-flow: row;
-	justify-content: flex-end;
+  display: flex;
+  flex-flow: row;
+  justify-content: flex-end;
 
-	width: 100%;
-	height: 100%;
+  width: 100%;
+  height: 100%;
 
-	margin-bottom: 20px;
+  margin-bottom: 20px;
 
-	.button {
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;
+  .button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 
-		width: 82px;
-		height: 40px;
+    width: 82px;
+    height: 40px;
 
-		cursor: pointer;
+    cursor: pointer;
 
-		font-family: Source Sans Pro;
-		font-style: normal;
-		font-weight: normal;
-		font-size: 16px;
-		line-height: 20px;
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
 
-		border-radius: 20px;
+    border-radius: 20px;
 
-		border: none;
+    border: none;
 
-		color: var(--app-ui-bg-white-1);
+    color: var(--app-ui-bg-white-1);
 
-		background-color: var(--app-ui-blue-1);
-		
-		&:active {
-			background-color: var(--app-ui-blue-2);
-		}
-		
+    background-color: var(--app-ui-blue-1);
+    
+    &:active {
+      background-color: var(--app-ui-blue-2);
+    }
+    
 
-		&:disabled {
-			background-color: lightgrey;
-		}
-	}
+    &:disabled {
+      background-color: lightgrey;
+    }
+  }
 
 
-	
+  
 }
 
 
