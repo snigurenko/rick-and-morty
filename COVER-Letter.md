@@ -17,14 +17,14 @@
 As a main purpose was easy make a project, 
 thats why I used some labories and plugins
 
-* Note
+*
 Use Base.vue layout and put components to module folder to show good practice in creating biggest projects and to use DRY
 
-* Note 
+*
 about settings file, it is not using in this project, but here as a example to commercial projects
 usually I put all variables, as a name and path, to one place to easy manage the project
 
-* Note 
+*
 useDebounced.js as a option, there is no need to put it here, but maybe u give me an extra point ;p
 
 ### Picel perfect 
