@@ -11,10 +11,6 @@ import { defineComponent} from "vue";
 
 import Header from "../components/Header.vue";
 
-
-
-
-
 export default defineComponent({
   name: "BaseLayout",
   components: {
@@ -22,7 +18,6 @@ export default defineComponent({
   },
 })
 </script>
-
 
 <style scoped lang="scss">
 .base-layout-wrapper {
@@ -55,7 +50,6 @@ export default defineComponent({
     height: 100%;
 
     overflow-y: auto;
-
   }
 
   @media (max-width: 480px) {

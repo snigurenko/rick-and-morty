@@ -2,15 +2,14 @@
 .select-wrapper
   .column
     label.label {{ label }}
-    
+
     // usually I prefere put img via components, it is easier to set if needed
-    // I tried do so with export svg chevron pic from figma, but result was wrong, 
+    // I tried do so with export svg chevron pic from figma, but result was wrong,
     // so I just put svg via img src
     // leave comented example here in template and script
-    
     //   icon-chevron(:iconName="Chevron")
     img(
-      alt="Chevron" 
+      alt="Chevron"
       src="../assets/icons/Chevron.svg"
       :class="{ rotate: showCharacterList, chevron: !showCharacterList }"
     )
@@ -41,15 +40,8 @@
 import { defineComponent, ref, onBeforeMount } from "vue";
 import { useStore } from "vuex";
 
-
-
-// import IconChevron from '../assets/icons/Chevron.vue'
-
 export default defineComponent({
   name: "select-character",
-//   components: {
-//     "icon-chevron": IconChevron,
-//   },
   props: {
     label: {
       type: String,
@@ -115,11 +107,11 @@ export default defineComponent({
   .label {
     font-size: 16px;
     line-height: 20px;
-    
+
     margin-top: 2px;
     margin-bottom: 9px;
   }
-  
+
   .input {
     @include input;
 
@@ -145,7 +137,7 @@ export default defineComponent({
       align-items: center;
 
       padding: 0 16px;
-      
+
       width: 100%;
       height: 34px;
 
@@ -157,7 +149,7 @@ export default defineComponent({
       }
     }
   }
-  
+
   .chevron, .rotate  {
     position: absolute;
 
@@ -170,8 +162,8 @@ export default defineComponent({
 
     transform: rotate(180deg);
     transition: transform 0.5s ease;
-  } 
-  
+  }
+
   .rotate {
     transition: transform 0.5s ease;
     transform: rotate(360deg);
@@ -197,7 +189,7 @@ export default defineComponent({
     .dropdown-content {
       max-height: 171px;
     }
-    // @include media-label;
+    @include media-label;
   }
 }
 

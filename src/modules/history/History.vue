@@ -1,16 +1,16 @@
 <template lang='pug'>
 .history-wrapper
-  .confirmation(v-if='confirmation') 
+  .confirmation(v-if='confirmation')
     span Message sent successfully
     img(src='../../assets/icons/IntergalaxyMark.svg' style="margin: 0 5px;")
   .title Message history
   .row(v-if='retrievedObject')
-    
+
   selected-character(
-      v-for="obj, index in retrievedObject.slice().reverse()",
-      :obj='obj',
-      :key='index'
-      ).selected-character
+    v-for="obj, index in retrievedObject.slice().reverse()",
+    :obj='obj',
+    :key='index'
+    ).selected-character
 
 </template>
 
@@ -33,7 +33,7 @@ export default defineComponent({
       CharacterObj.value.length > OldObjLength.value
       ? store.commit('history/setMsgSentWell', true)
       : store.commit('history/setMsgSentWell', false)
-      
+
       store.commit('history/setObjLength', CharacterObj.value.length)
     })
 
@@ -42,9 +42,9 @@ export default defineComponent({
 
     const confirmation = computed(()=> store.getters['history/getMsgSentWell'])
 
-    // Sure it's possible to use imperative method and set localStorage 'by hand', 
+    // Sure it's possible to use imperative method and set localStorage 'by hand',
     // but why, if I can use plugin and project conditions will be complit too
-    // example part of the code: 
+    // example part of the code:
     // onMounted(()=> {
     //   // const temp  = localStorage.getItem('testObject')
     //   // retrievedObject.value = JSON.parse(temp)
@@ -52,7 +52,7 @@ export default defineComponent({
     // let retrievedObject = ref({})
 
     const retrievedObject = computed(
-        ()=> store.getters['history/getCharacterObj']
+      ()=> store.getters['history/getCharacterObj']
     )
 
     return {
@@ -111,7 +111,7 @@ export default defineComponent({
 
   @media (max-width: 480px) {
     .title {
-   
+
       font-size: 24px;
       line-height: 30px;
 
@@ -119,7 +119,7 @@ export default defineComponent({
     }
 
   .confirmation {
-  
+
     font-size: 24px;
     line-height: 30px;
   }

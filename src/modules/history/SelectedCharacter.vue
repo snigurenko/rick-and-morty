@@ -8,12 +8,12 @@
       .item-title
         span {{obj.title}}
         img(
-          alt="Chevron" 
+          alt="Chevron"
           src="../../assets/icons/Chevron.svg"
           :class="{ rotate: toogle, chevron: !toogle }"
         )
       .item-content(v-if="toogle && currentCharacter")
-        .details  
+        .details
           .char-img
             img(:src="currentCharacter.image")
           .char-details
@@ -25,7 +25,7 @@
             span Using Quickpost&trade;
         .message
           span {{obj.message}}
-  
+
 </template>
 
 <script>
@@ -48,7 +48,7 @@ export default defineComponent({
     const intergalaxy = computed(()=> props.obj.intergalaxy === 'true' ? true : false)
 
     const changeToogle = () => {
-      
+
       !toogle.value
       ? fetchCurrentCharacter(props.obj.id)
       : currentCharacter.value = {}
@@ -58,15 +58,15 @@ export default defineComponent({
 
     // potentially this function can be moved to direct store, but there is no need to do it now
     const fetchCurrentCharacter = async (id) => {
-        const url = `https://rickandmortyapi.com/api/character/${id}`
-        try {
-            const response = await axios.get(url);
-            if (response.status === 200) {
-                currentCharacter.value = response.data
-            }
-          } catch (e) {
-            console.log(e.response);
+      const url = `https://rickandmortyapi.com/api/character/${id}`
+      try {
+        const response = await axios.get(url);
+          if (response.status === 200) {
+            currentCharacter.value = response.data
           }
+        } catch (e) {
+          console.log(e.response);
+        }
       }
 
     return {
@@ -83,7 +83,7 @@ export default defineComponent({
 .selected-history-wrapper {
   display: flex;
   flex-direction: column;
-  
+
   width: 100%;
   height: auto;
 
@@ -94,7 +94,7 @@ export default defineComponent({
 
     width: 100%;
     height: 50px;
-    
+
     border-bottom: solid 1px var(--app-ui-lightgrey);
 
     .item-title {

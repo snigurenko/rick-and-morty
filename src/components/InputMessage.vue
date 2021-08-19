@@ -6,16 +6,15 @@
 			id='message'
 			type='text'
 			:placeholder="placeholder"
-			v-model='message'
 			maxlength="256"
-			@keyup="onKeyUp"
+			@input="input"
 			autocomplete="off"
 		)
 		
 </template>
 
 <script>
-import { defineComponent, ref, onUnmounted, onBeforeMount } from "vue";
+import { defineComponent, onUnmounted, onBeforeMount } from "vue";
 import { useStore } from "vuex";
 
 
@@ -31,30 +30,24 @@ export default defineComponent ({
       type: String,
       default: "",
     },
+		input: {
+			type: Function, 
+			default: () => {
+        // Stub
+      },
+		}
 	},
 
 	setup: () => {
+		const store = useStore();
 
 		onBeforeMount(()=>{
 			store.commit('history/setMessage', '')
 		})
-		
-		const message = ref('')
-
-		const store = useStore();
 
 		onUnmounted(() => { 
 			store.commit('history/setMessageTitle', '')
 		});
-
-		const onKeyUp = () => {
-			store.commit('history/setMessage', message.value)
-		}
-
-		return {
-			message,
-			onKeyUp,
-		}
 	}	
 
 })

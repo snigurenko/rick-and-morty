@@ -9,9 +9,11 @@
         placeholder='Enter the title'
       )
       
+    // as an option U can send a function via props to input component
     .form-row
       rm-input-message.input-message(
         placeholder='Enter the message here...'
+        :input="setMessage"
       )
     
     .form-row
@@ -112,6 +114,11 @@ export default defineComponent({
       InterGalaxy.value = !InterGalaxy.value
     }
     
+    // that's caused not use v-model in input component, I show it here as an option
+    const setMessage = (e) => {
+			store.commit('history/setMessage', e.target.value)
+		}
+    
     return {
       characterList,
       store,
@@ -120,6 +127,7 @@ export default defineComponent({
       disabled,
       checkIntergalaxy,
       InterGalaxy,
+      setMessage,
     };
   },
 });
