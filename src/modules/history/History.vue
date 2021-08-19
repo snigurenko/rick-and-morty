@@ -111,18 +111,20 @@ export default defineComponent({
 
   @media (max-width: 480px) {
     .title {
+      width: 100%;
 
       font-size: 24px;
       line-height: 30px;
 
-      margin: 24px 0 50px;
+      margin: 5px 0 21px;
     }
 
-  .confirmation {
+    .confirmation {
+      width: 100%;
 
-    font-size: 24px;
-    line-height: 30px;
-  }
+      font-size: 24px;
+      line-height: 30px;
+    }
   }
 }
 </style>

@@ -1,7 +1,8 @@
 <template lang='pug'>
 .message-wrapper
   .title
-    span Send a new message
+    span Send a new 
+    span message
     
   form.form(@submit.prevent="onSubmit")
     .form-row
@@ -212,6 +213,20 @@ export default defineComponent({
           border: 1px solid var(--app-ui-grey-2);
         }
       }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .title {
+      display: flex;
+      flex-flow: column;
+
+      font-size: 24px;
+      line-height: 30px;
+
+      margin: 5px 0 21px;
+
+      width: 100%;
     }
   }
 }
