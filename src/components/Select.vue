@@ -63,24 +63,23 @@ export default defineComponent({
   },
 
   setup: () => {
-
-    onBeforeMount(()=>{
-      store.commit('history/setSelectedCharacterId', null)
-    })
+    onBeforeMount(() => {
+      store.commit("history/setSelectedCharacterId", null);
+    });
 
     const store = useStore();
-    const showCharacterList = ref(false)
-    const selectedLabel = ref('')
+    const showCharacterList = ref(false);
+    const selectedLabel = ref("");
 
     const expandCharacterList = () => {
-      showCharacterList.value = true
-    }
+      showCharacterList.value = true;
+    };
 
-    const selectCharacter = (option) =>  {
-      selectedLabel.value = option.label
-      showCharacterList.value = false
-      store.commit('history/setSelectedCharacterId', option.id)
-    }
+    const selectCharacter = (option) => {
+      selectedLabel.value = option.label;
+      showCharacterList.value = false;
+      store.commit("history/setSelectedCharacterId", option.id);
+    };
 
     return {
       showCharacterList,
@@ -93,7 +92,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-@import '../styles/mixin.scss';
+@import "../styles/mixin.scss";
 
 .select-wrapper {
   position: relative;
@@ -115,7 +114,7 @@ export default defineComponent({
   .input {
     @include input;
 
-    cursor: not-allowed;
+    cursor: pointer;
 
     &::placeholder {
       color: var(--app-ui-darkblue);
@@ -125,6 +124,9 @@ export default defineComponent({
   .dropdown-content {
     width: 100%;
     max-height: 138px;
+
+    font-size: 16px;
+    line-height: 20px;
 
     overflow-y: auto;
 
@@ -143,6 +145,8 @@ export default defineComponent({
 
       transition: background-color 0.3s ease;
 
+      cursor: pointer;
+
       &:hover {
         background-color: var(--app-ui-grey-1);
         transition: background-color 0.3s ease;
@@ -150,7 +154,8 @@ export default defineComponent({
     }
   }
 
-  .chevron, .rotate  {
+  .chevron,
+  .rotate {
     position: absolute;
 
     display: block;
@@ -192,5 +197,4 @@ export default defineComponent({
     @include media-label;
   }
 }
-
 </style>

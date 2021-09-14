@@ -1,4 +1,4 @@
-<template lang='pug'>
+<template lang="pug">
 .header-wrapper
   .navigation
     img.img(src="../assets/rick_morty.svg")
@@ -24,21 +24,20 @@ import { defineComponent, computed } from "vue";
 import router from "../router.js";
 
 export default defineComponent({
-  name: 'Header',
+  name: "Header",
   setup: () => {
-    const currentRoute = computed(()=> router.currentRoute.value.name)
+    const currentRoute = computed(() => router.currentRoute.value.name);
 
     const pushItem = (value) => {
-      router.push({ name: `${value}` })
-    }
+      router.push({ name: `${value}` });
+    };
 
     return {
       pushItem,
       currentRoute,
-    }
-  }
-
-})
+    };
+  },
+});
 </script>
 <style scoped lang="scss">
 .header-wrapper {
@@ -49,18 +48,16 @@ export default defineComponent({
   width: 100%;
   height: auto;
 
-
   .img {
     margin: 16px 0 16px 20px;
   }
- 
+
   .row {
     width: 100%;
 
     justify-content: center;
-
   }
-  
+
   .navigation {
     display: flex;
     flex-flow: row;
@@ -83,17 +80,19 @@ export default defineComponent({
 
       margin-right: -74px;
 
-      .item{
+      .item {
         background-color: var(--app-ui-bg-white);
         color: var(--app-ui-darkblue);
 
         padding: 6px 16px;
         margin-top: 32px;
-        
-        // I know that it is not a good practice to use 'all' 
+
+        // I know that it is not a good practice to use 'all'
         // but here a smal component and I used scoped and scss, so no worry
-        // I am sensetive for that if what :) 
+        // I am sensetive for that if what :)
         transition: all 0.1s ease;
+
+        cursor: pointer;
       }
 
       .active {
@@ -101,14 +100,13 @@ export default defineComponent({
         color: var(--app-ui-bg-white);
 
         transition: all 0.3s ease;
-        
       }
     }
 
     @media (max-width: 1160px) {
       .menu-items {
-         margin-right: 20px;
-         margin-bottom: -1px;
+        margin-right: 20px;
+        margin-bottom: -1px;
       }
     }
   }
