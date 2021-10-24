@@ -25,8 +25,6 @@
       ).select
 
     .form-row
-      // sorry, Have no time to make a component, want to sent it today, bacause next few days will fly away
-      // will change next week, this project will stay as my vue3 portfolio :)
       .inter-galaxy(@click='checkIntergalaxy')
         .checkbox(:class="{disabled : !InterGalaxy}")
           img(src="../../assets/icons/Checkpoint.svg" v-if="InterGalaxy") 
