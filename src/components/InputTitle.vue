@@ -1,4 +1,4 @@
-<template lang='pug'>
+<template lang="pug">
 .input-title-wrapper
   .column(:class="{error}")
     label.label(for='title' ) {{label}}
@@ -20,16 +20,16 @@
 import { defineComponent, onUnmounted, watchEffect, computed, ref } from "vue";
 import { useStore } from "vuex";
 
-import useDebounced from "../useDebounced"
+import useDebounced from "../useDebounced";
 
-const TITLE_VALIDATOR = /^[a-zA-Z0-9_ ]/
+const TITLE_VALIDATOR = /^[a-zA-Z0-9_ ]/;
 
-export default defineComponent ({
-  name: 'input-title',
+export default defineComponent({
+  name: "input-title",
   props: {
     label: {
       type: String,
-      default: 'Title',
+      default: "Title",
     },
     placeholder: {
       type: String,
@@ -41,37 +41,33 @@ export default defineComponent ({
     const store = useStore();
 
     const restrictSpecialChars = ($event) => {
-      $event.charCode === 0 || TITLE_VALIDATOR.test(String.fromCharCode($event.charCode))
-      ? true
-      : $event.preventDefault();
-    }
+      $event.charCode === 0 ||
+      TITLE_VALIDATOR.test(String.fromCharCode($event.charCode))
+        ? true
+        : $event.preventDefault();
+    };
 
-    const isTitleValid = computed( ()=> title.value.length > 2)
-    const error = ref(false)
+    const isTitleValid = computed(() => title.value.length > 2);
+    const error = ref(false);
 
     const onBlur = () => {
-      if (isTitleValid.value) {
-        error.value = false
-      } else {
-        error.value = true
-
-      }
-    }
+      isTitleValid.value ? (error.value = false) : (error.value = true);
+    };
 
     // as an example use useDebounced function imported from root src
     // in ImputMessage do it without, just using @input
     // here just want to show bouth methods
-    const title = useDebounced('', 300)
+    const title = useDebounced("", 300);
 
     watchEffect(() => {
-      store.commit('history/setMessageTitle', title.value)
+      store.commit("history/setMessageTitle", title.value);
       if (title.value.length > 0) {
-        onBlur()
+        onBlur();
       }
-    })
+    });
 
     onUnmounted(() => {
-      store.commit('history/setMessageTitle', '')
+      store.commit("history/setMessageTitle", "");
     });
 
     return {
@@ -79,12 +75,12 @@ export default defineComponent ({
       restrictSpecialChars,
       onBlur,
       error,
-    }
-  }
-})
+    };
+  },
+});
 </script>
 <style scoped lang="scss">
-@import '../styles/mixin.scss';
+@import "../styles/mixin.scss";
 
 .input-title-wrapper {
   position: relative;
@@ -111,7 +107,6 @@ export default defineComponent ({
   }
 
   .error {
-
     font-size: 12px;
     line-height: 15px;
 
@@ -129,19 +124,16 @@ export default defineComponent ({
 
       &::placeholder {
         color: var(--app-ui-red-1);
-        opacity: .4;
+        opacity: 0.4;
       }
     }
     .label {
       margin-bottom: 8px;
     }
-    
   }
 
   @media (max-width: 480px) {
     @include media-label;
   }
-
 }
 </style>
-
