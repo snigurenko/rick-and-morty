@@ -1,4 +1,4 @@
-<template lang='pug'>
+<template lang="pug">
 .history-wrapper
   .confirmation(v-if='confirmation')
     span Message sent successfully
@@ -18,7 +18,7 @@
 import { defineComponent, computed, onBeforeMount } from "vue";
 import { useStore } from "vuex";
 
-import SelectedCharacter from '../history/SelectedCharacter.vue'
+import SelectedCharacter from "../history/SelectedCharacter.vue";
 
 export default defineComponent({
   name: "History",
@@ -29,18 +29,22 @@ export default defineComponent({
     const store = useStore();
 
     // check if new message was added via length
-    onBeforeMount(()=>{
+    onBeforeMount(() => {
       CharacterObj.value.length > OldObjLength.value
-      ? store.commit('history/setMsgSentWell', true)
-      : store.commit('history/setMsgSentWell', false)
+        ? store.commit("history/setMsgSentWell", true)
+        : store.commit("history/setMsgSentWell", false);
 
-      store.commit('history/setObjLength', CharacterObj.value.length)
-    })
+      store.commit("history/setObjLength", CharacterObj.value.length);
+    });
 
-    const OldObjLength = computed(()=> store.getters['history/getObjLength'])
-    const CharacterObj = computed(()=> store.getters['history/getCharacterObj'])
+    const OldObjLength = computed(() => store.getters["history/getObjLength"]);
+    const CharacterObj = computed(
+      () => store.getters["history/getCharacterObj"]
+    );
 
-    const confirmation = computed(()=> store.getters['history/getMsgSentWell'])
+    const confirmation = computed(
+      () => store.getters["history/getMsgSentWell"]
+    );
 
     // Sure it's possible to use imperative method and set localStorage 'by hand',
     // but why, if I can use plugin and project conditions will be complit too
@@ -52,15 +56,15 @@ export default defineComponent({
     // let retrievedObject = ref({})
 
     const retrievedObject = computed(
-      ()=> store.getters['history/getCharacterObj']
-    )
+      () => store.getters["history/getCharacterObj"]
+    );
 
     return {
       retrievedObject,
       confirmation,
-    }
-  }
-})
+    };
+  },
+});
 </script>
 
 <style scoped lang="scss">
@@ -94,7 +98,7 @@ export default defineComponent({
 
     margin-top: 4px;
 
-    .title{
+    .title {
       font-style: normal;
       font-weight: 300;
       font-size: 32px;

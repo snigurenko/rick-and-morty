@@ -1,4 +1,4 @@
-<template lang='pug'>
+<template lang="pug">
 .message-wrapper
   .title
     span Send a new 
@@ -45,10 +45,10 @@ import { useStore } from "vuex";
 import router from "../../router.js";
 import { DateTime } from "luxon";
 
-import Select from "../../components/Select.vue"
-import Button from "../../components/Button.vue"
-import InputTitle from "../../components/InputTitle.vue"
-import InputMessage from '../../components/InputMessage.vue'
+import Select from "../../components/Select.vue";
+import Button from "../../components/Button.vue";
+import InputTitle from "../../components/InputTitle.vue";
+import InputMessage from "../../components/InputMessage.vue";
 
 export default defineComponent({
   name: "Message",
@@ -59,65 +59,68 @@ export default defineComponent({
     "rm-input-message": InputMessage,
   },
   setup: () => {
-    onMounted(()=> {
-      // do it now to avoid possible delays in the response from the server side 
+    onMounted(() => {
+      // do it now to avoid possible delays in the response from the server side
       // when opening the select list
-      store.dispatch('history/fetchCharacter')
+      store.dispatch("history/fetchCharacter");
 
-      SetObjLength()
-    })
+      SetObjLength();
+    });
 
-    const getCharacterObj = computed(()=> store.getters['history/getCharacterObj'])
+    const getCharacterObj = computed(
+      () => store.getters["history/getCharacterObj"]
+    );
 
-    const SetObjLength = ()=> {
-      const temp  = getCharacterObj.value.length
-      store.commit('history/setObjLength', temp)
-    }
+    const SetObjLength = () => {
+      const temp = getCharacterObj.value.length;
+      store.commit("history/setObjLength", temp);
+    };
 
     const store = useStore();
-   
-    const message = ref('')
-    const disabled = ref(false)
 
-    const InterGalaxy = ref(false)
-    
+    const message = ref("");
+    const disabled = ref(false);
+
+    const InterGalaxy = ref(false);
+
     // here will be just 'name' and 'id'
     // and I throw it to the select component as a props
     const characterList = computed(
-      () => store.getters['history/getCharacterList']
-    )
+      () => store.getters["history/getCharacterList"]
+    );
 
-    const getTitle = computed(()=> store.getters['history/getMessageTitle'])
-    const getMessage = computed(()=> store.getters['history/getMessage'])
+    const getTitle = computed(() => store.getters["history/getMessageTitle"]);
+    const getMessage = computed(() => store.getters["history/getMessage"]);
 
     const onSubmit = () => {
-      const datestamp = DateTime.now().toISO()
-      const time = DateTime.fromISO(datestamp).toFormat("HH':'mm")
-      const date = DateTime.now().toLocaleString()
-      
+      const datestamp = DateTime.now().toISO();
+      const time = DateTime.fromISO(datestamp).toFormat("HH':'mm");
+      const date = DateTime.now().toLocaleString();
+
       const characterObject = {
         title: `${getTitle.value}`,
         message: `${getMessage.value}`,
         date: `${date}`,
         time: `${time}`,
         intergalaxy: `${InterGalaxy.value}`,
-        id: `${store.getters['history/getSelectedCharacterId']}`,
-      }
+        id: `${store.getters["history/getSelectedCharacterId"]}`,
+      };
       // here I use store, and not set manually localStorage, because of the plugin in root_store
-      store.commit('history/setCharacterObj', characterObject)
-      
-      router.push({ name: 'History' })
+      store.commit("history/setCharacterObj", characterObject);
+
+      router.push({ name: "History" });
     };
 
     const checkIntergalaxy = () => {
-      InterGalaxy.value = !InterGalaxy.value
-    }
-    
+      InterGalaxy.value = !InterGalaxy.value;
+    };
+
     // that's caused not use v-model in input component, I show it here as an option
+    // or u can use $emit as well
     const setMessage = (e) => {
-      store.commit('history/setMessage', e.target.value)
-    }
-    
+      store.commit("history/setMessage", e.target.value);
+    };
+
     return {
       characterList,
       store,
@@ -154,10 +157,10 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+
     width: 100%;
     height: 100%;
-    
+
     .form-row {
       display: flex;
       flex-direction: column;
@@ -169,7 +172,9 @@ export default defineComponent({
         margin-bottom: 25px;
       }
 
-      .input-title, .input-message, .select {
+      .input-title,
+      .input-message,
+      .select {
         display: block;
         width: 100%;
       }
@@ -228,5 +233,4 @@ export default defineComponent({
     }
   }
 }
-
 </style>
